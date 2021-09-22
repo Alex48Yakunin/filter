@@ -1,11 +1,11 @@
 export default function Toolbar(props){
 
-  const {filters, filter, selected} = props;
+  const {filters, onSelectFilter, selected} = props;
 
   const toolbarLinks = filters.map((item, index) =>
   <button 
       className={selected === item ? 'toolbar__link toolbar__link_active' : 'toolbar__link'} 
-      onClick={filter} 
+      onClick={onSelectFilter} 
       data-filter={item} 
       key={index} >{item}
   </button>

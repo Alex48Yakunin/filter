@@ -67,28 +67,34 @@ export default class Portfolio extends React.Component  {
   }
 
   filter(e){
-    let select = e.currentTarget.getAttribute('data-filter');
+      let filter = e.currentTarget.getAttribute('data-filter');
 
-    this.setState(
-      {
-        projects: this.state.projects.filter(item => item.category === select),
-        selected: select
+      this.setState(
+        {
+          selected: filter
+        }
+      )
+
+      if (filter !== "All") {
+        const filteredProjects = this.state.projects.filter((item) => item.category === filter);
+        this.setState({ projects: filteredProjects });
+      } else {
+        this.setState({ projects: this.state.projects });
       }
-    )
 
   }
 
  
-render(){
-  return (
-    <div className="portfolio">
-        <Toolbar 
-            filters={this.state.filters}
-            selected={this.state.selected}
-            filter={this.filter}
-        />
-        <ProjectList projects={this.state.projects}/>
-  </div>
-)
-}
+  render(){
+      return (
+        <div className="portfolio">
+            <Toolbar 
+                filters={this.state.filters}
+                selected={this.state.selected}
+                onSelectFilter={this.filter}
+            />
+            <ProjectList projects={this.state.projects}/>
+      </div>
+    )
+  }
 }
